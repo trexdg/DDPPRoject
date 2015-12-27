@@ -1,0 +1,60 @@
+---
+title: 'Course Project: Developing Data Products: mtcars Apps '
+author: "SN Jalis"
+date: "December 27, 2015"
+output: html_document
+---
+
+## Overview
+
+For this project, I have developed a Shiny Application for use with the mtcars data package in R. I've encountered this data during the Module 7: Regression Model which can be sourced from [here](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html)
+
+## Objective
+
+*mtcars Apps* allows the user to drill down the features of the chosen car. The apss will also show the mean value of the chosen car feature across all of the records associated with the chosen car manufacturer. 
+
+The apps is indeed simple but may be resourceful as more manufacturers being added in the database.
+
+## Development 
+
+1. Extract the car manufacturer from the row names of the mtcars data using below code and saved in the server.R file:
+
+```{r results='hide'}
+library(datasets)
+data(mtcars)
+
+#Extract the row names as a column in the dataset
+mtcars$makemodel <- rownames(mtcars)
+
+#Extract the manufacturer/make from the rownames
+mtcars$make <- gsub( " .*$", "", mtcars$makemodel)
+```
+
+2. The mean value was then derived in the way shown below. The variables "make" and "feature" in the code below represent the input values selected by the application user:
+
+```{r results='hide'}
+make <- "Mazda"
+feature <- "qsec"
+
+data <- mtcars[mtcars$make==make,feature]
+paste("The mean value of",feature,"for",make,"cars is",print(mean(data)))
+```
+
+## Viewing and Running the mtcars App
+
+The shiny application I developed has been published to the Shiny server at the following [Link](https://trexdg.shinyapps.io/DDPProject)
+
+## Car feature
+A number of car features can be selected in this Shiny Application. Each feature is defined below:
+
+1. mpg - Miles/(US) gallon
+2. cyl - Number of cylinders
+3. disp	 - Displacement (cu.in.)
+4. hp	 - Gross horsepower
+5. drat	 - Rear axle ratio
+6. wt	 - Weight (lb/1000)
+7. qsec	 - 1/4 mile time
+8. vs	 - V/S
+9. am	 - Transmission (0 = automatic, 1 = manual)
+10. gear - Number of forward gears
+11. carb - Number of carburetors
