@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Course Project Developing Data Products</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Course Project Developing Data Products">
+  <meta name="author" content="SN Jalis">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Course Project Developing Data Products</h1>
+    <h2>mtcars Apps</h2>
+    <p>SN Jalis<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>For this project, I have developed a Shiny Application for use with the mtcars data package in R. I&#39;ve encountered this data during the Module 7: Regression Model which can be sourced from <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html">here</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Objective</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><em>mtcars Apps</em> allows the user to drill down the features of the chosen car. The apss will also show the mean value of the chosen car feature across all of the records associated with the chosen car manufacturer. </p>
+
+<p>The apps is indeed simple but may be resourceful as more manufacturers being added in the database.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Development</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Extract the car manufacturer from the row names of the mtcars data using below code and saved in the server.R file:</li>
+</ol>
+
+<pre><code class="r">library(datasets)
+data(mtcars)
+
+#Extract the row names as a column in the dataset
+mtcars$makemodel &lt;- rownames(mtcars)
+
+#Extract the manufacturer/make from the rownames
+mtcars$make &lt;- gsub( &quot; .*$&quot;, &quot;&quot;, mtcars$makemodel)
+</code></pre>
+
+<ol>
+<li>The mean value was then derived in the way shown below. The variables &quot;make&quot; and &quot;feature&quot; in the code below represent the input values selected by the application user:</li>
+</ol>
+
+<pre><code class="r">make &lt;- &quot;Mazda&quot;
+feature &lt;- &quot;qsec&quot;
+
+data &lt;- mtcars[mtcars$make==make,feature]
+paste(&quot;The mean value of&quot;,feature,&quot;for&quot;,make,&quot;cars is&quot;,print(mean(data)))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Viewing and Running the mtcars App</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The shiny application I developed has been published to the Shiny server at the following <a href="https://trexdg.shinyapps.io/DDPProject">Link</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Overview'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Objective'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Development'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Viewing and Running the mtcars App'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='NA'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
